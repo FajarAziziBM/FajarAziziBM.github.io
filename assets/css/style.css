@@ -1,0 +1,42 @@
+body {
+  background: #0f172a;
+  color: white;
+  scroll-behavior: smooth;
+}
+
+.glass {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+section {
+  padding: 120px 0;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, #0dcaf0, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-custom {
+  background: rgba(255,255,255,0.05);
+  border: none;
+  backdrop-filter: blur(8px);
+  transition: 0.4s;
+}
+
+.card-custom:hover {
+  transform: translateY(-10px);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
