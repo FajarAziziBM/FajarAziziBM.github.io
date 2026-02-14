@@ -1,26 +1,58 @@
-// Load microservice sections
-async function loadSection(id, path) {
-  const response = await fetch(path);
-  const data = await response.text();
-  document.getElementById(id).innerHTML = data;
+// =============================
+// Microservice Configuration
+// =============================
+
+const services = [
+  { id: "hero", path: "services/hero/hero.html" },
+  { id: "about", path: "services/about/about.html" },
+  { id: "projects", path: "services/projects/projects.html" },
+  { id: "contact", path: "services/contact/contact.html" }
+];
+
+// =============================
+// Section Loader
+// =============================
+
+async function loadSection(service) {
+  try {
+    const response = await fetch(service.path);
+    const html = await response.text();
+    document.getElementById(service.id).innerHTML = html;
+  } catch (error) {
+    console.error(`Error loading ${service.id}:`, error);
+  }
 }
 
-loadSection("hero", "services/hero/hero.html");
-loadSection("about", "services/about/about.html");
-loadSection("projects", "services/projects/projects.html");
-loadSection("contact", "services/contact/contact.html");
+// =============================
+// Initialize App
+// =============================
 
+async function init() {
+  for (const service of services) {
+    await loadSection(service);
+  }
+  initAnimation();
+}
 
-// Scroll Animation
-window.addEventListener("scroll", () => {
+init();
+
+// =============================
+// Scroll Animation Engine
+// =============================
+
+function initAnimation() {
   const elements = document.querySelectorAll(".fade-up");
 
-  elements.forEach(el => {
-    const position = el.getBoundingClientRect().top;
-    const screenHeight = window.innerHeight;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
 
-    if (position < screenHeight - 100) {
-      el.classList.add("show");
-    }
-  });
-});
+  elements.forEach(el => observer.observe(el));
+}
