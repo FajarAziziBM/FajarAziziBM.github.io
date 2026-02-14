@@ -1,7 +1,15 @@
+/* ========================= */
+/* BASE STYLE */
+/* ========================= */
+
 body {
   background: #0f172a;
-  color: white;
+  color: #ffffff;
   scroll-behavior: smooth;
+}
+
+section {
+  padding: 120px 0;
 }
 
 .glass {
@@ -9,9 +17,10 @@ body {
   backdrop-filter: blur(10px);
 }
 
-section {
-  padding: 120px 0;
-}
+
+/* ========================= */
+/* TEXT STYLE */
+/* ========================= */
 
 .gradient-text {
   background: linear-gradient(45deg, #0dcaf0, #6366f1);
@@ -19,31 +28,89 @@ section {
   -webkit-text-fill-color: transparent;
 }
 
+
+/* ========================= */
+/* CARD STYLE */
+/* ========================= */
+
 .card-custom {
   background: rgba(255, 255, 255, 0.05);
   border: none;
   backdrop-filter: blur(8px);
-  transition: 0.4s;
+  transition: transform 0.4s ease;
 }
 
 .card-custom:hover {
   transform: translateY(-10px);
 }
 
+
+/* ========================= */
+/* FADE UP ANIMATION */
+/* ========================= */
+
 .fade-up {
   visibility: hidden;
   opacity: 0;
   transform: translate3d(0, 40px, 0);
   transition:
-    opacity 2s cubic-bezier(0.5, 0, 0, 1) 0.1s,
-    transform 2s cubic-bezier(0.5, 0, 0, 1) 0.1s;
+    opacity 1.2s cubic-bezier(0.5, 0, 0, 1),
+    transform 1.2s cubic-bezier(0.5, 0, 0, 1);
 }
 
 .fade-up.show {
   visibility: visible;
   opacity: 1;
-  transform: matrix3d(1, 0, 0, 0,
-      0, 1, 0, 0,
-      0, 0, 1, 0,
-      0, 0, 0, 1);
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* ========================= */
+/* TYPEWRITER CLEAN EFFECT */
+/* ========================= */
+
+.typing-text {
+  position: relative;
+}
+
+/* Default huruf tersembunyi */
+.typing-text .letter {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Saat aktif */
+.typing-text .letter.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ========================= */
+/* CURSOR */
+/* ========================= */
+
+.cursor {
+  display: inline-block;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+  color: #0dcaf0;
+  font-weight: 500;
+}
+
+@keyframes blink {
+
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+  }
 }

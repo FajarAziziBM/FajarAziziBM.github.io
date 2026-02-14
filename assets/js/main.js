@@ -31,7 +31,13 @@ async function init() {
   for (const service of services) {
     await loadSection(service);
   }
+
   initAnimation();
+
+  // Delay supaya fade-up selesai dulu
+  setTimeout(() => {
+    initTypewriter();
+  }, 1200);
 }
 
 init();
@@ -55,4 +61,35 @@ function initAnimation() {
   );
 
   elements.forEach(el => observer.observe(el));
+}
+
+// =============================
+// REAL TYPEWRITER EFFECT
+// =============================
+
+function initTypewriter() {
+  const element = document.getElementById("typingName");
+  if (!element) return;
+
+  const text = "Fajar Azizi Boang Manalu";
+  let index = 0;
+
+  function typeLetter() {
+    if (index < text.length) {
+      const span = document.createElement("span");
+      span.textContent = text[index];
+      span.classList.add("letter");
+
+      element.appendChild(span);
+
+      setTimeout(() => {
+        span.classList.add("show");
+      }, 50);
+
+      index++;
+      setTimeout(typeLetter, 80); // kecepatan ketik
+    }
+  }
+
+  typeLetter();
 }
